@@ -1,222 +1,445 @@
-# Day 1 Script — Setup, safety, mission start
+# Day 1 Script — Start szybko, pracuj bezpiecznie
 
-## Day objective
-Participants leave Day 1 with:
-- working Codex setup,
-- safe execution model (sandbox + approvals),
-- shared project direction,
-- first tangible artifacts,
-- motivation and confidence to continue.
+## Outcome dnia
+Po Day 1 uczestnicy mają:
+- działający workflow Codex-first,
+- ustawione bezpieczne domyślne zasady pracy (sandbox + approvals + granice repo),
+- wspólny obraz celu kursu i zakresu MVP,
+- pierwszy sensowny artefakt PRD/AGENTS lub mały wynik repo,
+- większy spokój: „wiem, jak zacząć i nie narobić szkód”.
 
-## Timebox
-- 09:00–11:00 session
-- 11:00–11:15 break
-- 11:15–13:00 session
-- 13:00–13:30 break
-- 13:30–14:30 session
-- 14:30–14:40 optional break
-- 14:40–16:00 session
+## Linki dnia / mapa zależności
+- Quiz otwarcia: `materials/quizzes/day-1-anonymous-ai-basics-quiz.md`
+- Prompty modułowe (planowane uzupełnienie): `prompts/02-module-prompts.md`
+- Ćwiczenia kursowe (planowane uzupełnienie): `exercises/03-exercises.md`
+- Scenariusze demo (planowane uzupełnienie): `materials/04-demo-scenarios.md`
 
----
+## Agenda dnia
+- 09:00–09:20 — Zoom onboarding + zasady pracy
+- 09:20–09:40 — Krótka runda zapoznawcza
+- 09:40–10:00 — Anonimowy quiz AI basics
+- 10:00–10:25 — Mission kickoff: po co ten tydzień i po co ten workflow
+- 10:25–11:00 — Codex-first safe setup + pierwszy mały sukces
+- 11:00–11:15 — PRZERWA
+- 11:15–11:35 — Krótkie porównanie: Codex vs Claude vs IntelliJ AI Assistant
+- 11:35–12:05 — Projekt tygodnia i zakres MVP
+- 12:05–13:00 — PRD + AGENTS mini-workshop
+- 13:00–13:30 — PRZERWA
+- 13:30–14:15 — Pierwszy widoczny artefakt repo
+- 14:15–14:30 — Review loop: generated draft ≠ truth
+- 14:30–14:40 — OPCJONALNA PRZERWA
+- 14:40–15:20 — Flow pracy bez tarcia: ergonomia terminala i rytm pracy
+- 15:20–15:45 — Bonus opcjonalny: Handy.computer teaser
+- 15:45–16:00 — Podsumowanie dnia + praca domowa
 
-## 09:00–09:20 — Zoom onboarding + training contract
+## 09:00–09:20 — Zoom onboarding + zasady pracy
+### Why this matters in daily work
+- Nawet najlepszy warsztat siada, jeśli komunikacja i rytm pracy są chaotyczne.
+- Dobre zasady od początku skracają przestoje, pytania „co teraz?” i techniczny hałas.
+
 ### Co mówię
-- Krótkie przywitanie i check audio/video.
-- Prośba o używanie reakcji 👍 dla potwierdzeń i pytań na czacie.
-- Zachęta do kamerek (lepsza dynamika jak na sali szkoleniowej).
-- Podziękowanie osobom z włączonymi kamerkami.
-- Omówienie przerw i metodyki warsztatowej (mało slajdów, dużo praktyki).
+- „Zaczynamy praktycznie: mało slajdów, dużo małych kroków i szybkich efektów.”
+- „Kamerki są mile widziane — łatwiej mi wyczuć, czy jedziemy za szybko czy za wolno.”
+- „Pytania wrzucacie od razu na czat. Nie czekamy na idealny moment.”
+- „Reakcja 👍 = jasne / działa / jestem z Wami. To nasz mini-protokół synchronizacji.”
+- „Nasza misja: zwiększyć tempo pracy programisty bez speedrunu do produkcyjnej katastrofy.”
 
 ### Co pokazuję
-- Agenda dnia i godziny przerw.
-- Szybki “jak komunikujemy się na Zoomie”.
+- Agendę całego dnia i godziny przerw.
+- Zasady pracy na Zoomie: audio, chat, reakcje, tempo, pytania.
+- 5-dniową mapę kursu i końcowy efekt tygodnia.
 
 ### Co wklejam na chat
-"Zasady pracy: 1) reakcja 👍 = jasne, 2) pytania wrzucamy na czat od razu, 3) kamerki mile widziane (łatwiej prowadzić i reagować), 4) robimy dużo praktyki i mini-ćwiczeń." 
+- `Zasady pracy: 1) 👍 = jasne / działa, 2) pytania wrzucamy od razu na czat, 3) kamerki mile widziane, 4) po każdym większym bloku robimy mini-ćwiczenie, 5) AI traktujemy jako draft + przyspieszenie, nie wyrocznię.`
 
 ### Ćwiczenie
-- każdy daje reakcję 👍 i wpisuje “gotowy/a”.
+- Core: każdy daje reakcję 👍 i wpisuje na czacie „gotowy/a”.
+- Stretch: kto chce, dopisuje w 1 zdaniu, czego najbardziej chce uniknąć przy pracy z AI.
 
-### Feedback (Kolb)
-- Experience: użyliśmy wspólnego kanału komunikacji
-- Reflection: czy to działa i jest wygodne?
-- Concept: jasny protokół komunikacji
-- Experiment: używamy tego przez cały dzień
+### Feedback loop (Kolb)
+- Doświadczenie: wszyscy używają jednego prostego kanału synchronizacji.
+- Refleksja: czy taka forma komunikacji jest wygodna?
+- Konceptualizacja: jasne zasady = mniej tarcia poznawczego.
+- Testowanie: używamy tego protokołu przez cały dzień.
 
----
+### Szacowany czas
+- 20 min
 
-## 09:20–09:35 — Krótka runda zapoznawcza
+## 09:20–09:40 — Krótka runda zapoznawcza
+### Why this matters in daily work
+- Mieszana grupa (Java / DB / low-code / architektura) potrzebuje wspólnego obrazu poziomu i realnych pain pointów.
+- Dzięki temu łatwiej dobrać przykłady, tempo i poziom szczegółu.
+
 ### Co mówię
-- "Każdy 20–30 sekund: rola, stack, jak dziś używa AI, największa frustracja z AI."
+- „Max 20–30 sekund na osobę: rola, stack, jak dziś używacie AI i co Was najbardziej frustruje.”
+- „To nie jest autoprezentacja na LinkedIn, tylko szybki radar dla mnie.”
+- „Szukamy wspólnych bóli, bo to one dadzą nam najlepsze przykłady na resztę tygodnia.”
 
 ### Co pokazuję
-- 4 pytania na slajdzie.
+- 4 pytania na slajdzie lub w prostym ekranie współdzielonym.
+- Miejsca wspólne między uczestnikami: np. SQL, dokumentacja, review, legacy, onboarding.
 
 ### Co wklejam na chat
-"Runda intro (max 30s/os): rola, stack, jak dziś używasz AI, największy pain point." 
+- `Runda intro (max 30s/os): 1) rola, 2) stack, 3) jak dziś używasz AI, 4) największy pain point.`
 
 ### Ćwiczenie
-- szybkie wypowiedzi uczestników.
+- Core: szybka runda ustna.
+- Stretch: uczestnicy wpisują na czacie 1 obszar, w którym AI już pomaga albo najbardziej zawodzi.
 
-### Feedback
-- Zbierasz top 3 pain points i mówisz, że wrócicie do nich podczas modułów.
+### Feedback loop (Kolb)
+- Doświadczenie: zbieramy realny kontekst z grupy.
+- Refleksja: które problemy powtarzają się najczęściej?
+- Konceptualizacja: szkolenie ma odpowiadać na prawdziwe potrzeby, nie ogólniki.
+- Testowanie: wracamy do tych pain pointów w kolejnych blokach i sprawdzamy, czy je odczarowaliśmy.
 
----
+### Szacowany czas
+- 20 min
 
-## 09:35–10:00 — Anonimowy quiz poziomujący
+## 09:40–10:00 — Anonimowy quiz AI basics
+### Why this matters in daily work
+- Bez diagnozy łatwo przestrzelić z poziomem: dla części grupy będzie za wolno, dla części za szybko.
+- Quiz daje wspólny język do pojęć, które później wpływają na jakość promptów i review.
+
 ### Co mówię
-- "To nie egzamin, tylko radar — dzięki temu dopasuję tempo i poziom." 
+- „To nie egzamin. To radar, żebym wiedział, gdzie zwolnić, a gdzie przyspieszyć.”
+- „Jeśli czegoś nie wiecie — super. Znaczy, że jest po co tu być.”
+- „Nie chcemy sztucznej pewności. Wolimy szybko odkryć luki niż później ufać złym założeniom.”
 
 ### Co pokazuję
-- Quiz z pliku:
-  - `materials/quizzes/day-1-anonymous-ai-basics-quiz.md`
+- Quiz z pliku `materials/quizzes/day-1-anonymous-ai-basics-quiz.md`.
+- Krótkie omówienie tematów: token, context window, hallucination, alignment, sandbox, agent vs assistant.
 
 ### Co wklejam na chat
-"Quiz jest anonimowy. Celem jest dobrać poziom szkolenia, nie wystawić ocenę." 
+- `Quiz jest anonimowy. Celem jest dobrać tempo szkolenia, nie wystawić ocenę. Jeśli coś brzmi obco — idealnie, właśnie po to tu jesteśmy.`
 
 ### Ćwiczenie
-- uczestnicy rozwiązują quiz.
+- Core: uczestnicy rozwiązują quiz.
+- Stretch: chętni zaznaczają, które pytanie było najbardziej mylące i dlaczego.
 
-### Feedback
-- szybkie omówienie wyników i decyzja o tempie.
+### Feedback loop (Kolb)
+- Doświadczenie: każdy konfrontuje intuicję z podstawami.
+- Refleksja: które pojęcia są najmniej stabilne w grupie?
+- Konceptualizacja: dobra praca z AI zaczyna się od dobrych modeli mentalnych.
+- Testowanie: w dalszych blokach sprawdzamy, czy te pojęcia przekładają się na lepsze decyzje.
 
----
+### Szacowany czas
+- 20 min
 
-## 10:00–10:20 — Mission kickoff: po co to wszystko?
+## 10:00–10:25 — Mission kickoff: po co ten tydzień i po co ten workflow
+### Why this matters in daily work
+- Ludzie wdrażają workflow nie dlatego, że jest „modny”, tylko dlatego, że widzą sens i przewagę w swojej codziennej pracy.
+- Potrzebujemy wspólnej odpowiedzi na pytanie: „co ja z tego realnie mam?”.
+
 ### Co mówię
-- Narracja “misja”: AI jako wzmacniacz, nie zamiennik człowieka.
-- Rider: konkrety (czas, jakość, bezpieczeństwo).
-- Elephant: przygoda, mniejsza frustracja, więcej flow.
-- Lekki żart: "Chcemy być szybsi, ale nie na zasadzie speedrun do produkcyjnej katastrofy".
+- „AI nie ma zastąpić myślenia. Ma skrócić drogę od pomysłu do sprawdzonego wyniku.”
+- „Przez tydzień budujemy jeden spójny case, zamiast skakać po losowych demach.”
+- „Rider chce logiki, Elephant chce bezpieczeństwa i poczucia, że to jest dla mnie. Dajemy obu to, czego potrzebują.”
+- „Będziemy szybsi, ale nie w stylu: YOLO, merge, modlitwa i rollback.”
 
 ### Co pokazuję
-- Plan 5 dni i finalny efekt.
+- 5-dniową mapę kursu.
+- Finalny efekt tygodnia: repo, materiały, prompty, ćwiczenia i praktyczny workflow.
+- Gdzie ten workflow pomaga na co dzień: analiza wymagań, PRD, slice’y, kod, review, dokumentacja.
 
 ### Co wklejam na chat
-"Cel tygodnia: zbudować działający projekt + nauczyć się workflow, który realnie da się wdrożyć po szkoleniu." 
-
----
-
-## 10:20–11:00 — Codex-first + safe autonomy intro
-### Co mówię
-- Dlaczego Codex jako główny workflow.
-- Krótkie porównanie (tylko orientacyjnie): Claude CLI/Desktop, IntelliJ AI Assistant.
-- Bezpieczeństwo: sandbox, approval mode, repo boundaries.
-
-### Co pokazuję
-- pierwszy run codex,
-- safe profile,
-- przykład małego zadania.
-
-### Co wklejam na chat
-"Checklist startowa: [1] codex działa, [2] sandbox + approvals ustawione, [3] pierwsze zadanie wykonane." 
+- `Cel tygodnia: zbudować działający, sensowny mini-case i nauczyć się workflow, który realnie skraca pracę bez oddawania kontroli.`
 
 ### Ćwiczenie
-- każdy uruchamia pierwszy task.
+- Core: uczestnicy wskazują 1 obszar, w którym chcieliby odzyskać czas dzięki AI.
+- Stretch: dopisują 1 obawę związaną z użyciem AI w środowisku regulowanym.
 
-### Feedback
-- przegląd 2-3 wyników i korekta promptów.
+### Feedback loop (Kolb)
+- Doświadczenie: uczestnicy nazywają własne potrzeby i obawy.
+- Refleksja: co jest dla nich największą wartością, a co największym ryzykiem?
+- Konceptualizacja: dobry workflow musi zwiększać tempo i kontrolę jednocześnie.
+- Testowanie: w kolejnych blokach mierzymy, czy faktycznie to dostajemy.
 
----
+### Szacowany czas
+- 25 min
+
+## 10:25–11:00 — Codex-first safe setup + pierwszy mały sukces
+### Why this matters in daily work
+- Jeśli pierwszy kontakt z agentem jest zbyt trudny albo zbyt ryzykowny, zespół szybko wróci do starych nawyków.
+- Dobre wejście to mały, szybki sukces w bezpiecznych granicach.
+
+### Co mówię
+- „Codex jest naszym głównym torem jazdy w tym kursie: prosty, szybki, terminal-first.”
+- „Najpierw uczymy się bezpiecznej autonomii: sandbox, approvals, granice repo, małe zadania.”
+- „Nie chcemy rozpędzić agenta bez kierownicy. Najpierw trasa, potem gaz.”
+- „Najlepszy prompt na start nie jest najdłuższy — jest najjaśniejszy.”
+
+### Co pokazuję
+- Pierwsze uruchomienie Codex w bezpiecznym katalogu.
+- Różnicę między sandbox + approvals a zbyt luźnym trybem pracy.
+- Mały task startowy, np. szkic PRD albo propozycję backlog slice’ów dla aplikacji NBP DevCopilot.
+
+### Co wklejam na chat
+- `Checklist startowa: [1] narzędzie działa, [2] pracujemy w dedykowanym repo, [3] sandbox + approvals ustawione, [4] pierwszy mały task zakończony, [5] wynik sprawdzony przez człowieka.`
+
+### Ćwiczenie
+- Core: każdy uruchamia pierwszy mały task w Codex.
+- Stretch: dopracowuje prompt tak, by wynik był bardziej konkretny i testowalny.
+
+### Feedback loop (Kolb)
+- Doświadczenie: uczestnicy sami wykonują pierwszy przebieg agentowy.
+- Refleksja: co zadziałało, a co było niejasne?
+- Konceptualizacja: małe taski + bezpieczne granice = większa kontrola i mniej frustracji.
+- Testowanie: potem powtórzymy ten sam wzorzec na bardziej realnych artefaktach.
+
+### Szacowany czas
+- 35 min
 
 ## 11:00–11:15 — PRZERWA
 
----
+## 11:15–11:35 — Krótkie porównanie: Codex vs Claude vs IntelliJ AI Assistant
+### Why this matters in daily work
+- Zespół musi wiedzieć, dlaczego wybieramy główny workflow, zamiast tonąć w tool sprawl.
+- Świadomy wybór narzędzia zmniejsza chaos i spory „czym to robić”.
 
-## 11:15–12:00 — Projekt i scope
 ### Co mówię
-- Definicja appki i zakres MVP.
-- Jasno odcinamy “nice to have”.
+- „Primary path w tym kursie to Codex CLI/App. Reszta jest porównaniem, nie równoległym curriculum.”
+- „Claude pokazujemy krótko jako kontrast, IntelliJ AI Assistant jako most do środowiska IDE.”
+- „Chodzi o workflow, nie o kolekcjonowanie Pokemonów AI.”
+- „W praktyce: jeden główny tor + świadomość ograniczeń pozostałych opcji.”
 
 ### Co pokazuję
-- funkcje MVP,
-- role użytkowników,
-- ryzyka.
+- Krótką tabelę: Codex / Claude / IntelliJ AI Assistant.
+- Gdzie Codex wygrywa dydaktycznie: prostota, terminal-first, praca zadaniowa.
+- Gdzie IntelliJ pomaga jako editor/review/debug bridge, ale nie zastępuje głównego toru kursu.
 
 ### Co wklejam na chat
-"MVP = ma działać bezpiecznie i przewidywalnie. Funkcje ekstra dokładamy dopiero po stabilnej bazie." 
+- `Na tym kursie: Codex = workflow główny. Claude i IntelliJ pokazujemy krótko jako porównanie i kontekst, nie jako drugi pełny tor szkolenia.`
 
 ### Ćwiczenie
-- uczestnicy proponują 1 funkcję “must” i 1 “later”.
+- Core: uczestnicy wpisują, które narzędzie znają najlepiej i czego im w nim brakuje.
+- Stretch: dopisują, czego oczekują od narzędzia „głównego” w pracy zespołowej.
 
----
+### Feedback loop (Kolb)
+- Doświadczenie: porównujemy realne oczekiwania wobec narzędzi.
+- Refleksja: co daje wartość, a co tylko zwiększa szum?
+- Konceptualizacja: mniej narzędzi, więcej powtarzalności workflow.
+- Testowanie: cały tydzień lecimy głównie jednym torem i oceniamy, czy to było słuszne.
 
-## 12:00–13:00 — PRD/AGENTS mini-workshop
+### Szacowany czas
+- 20 min
+
+## 11:35–12:05 — Projekt tygodnia i zakres MVP
+### Why this matters in daily work
+- Agent bez jasnego zakresu produkuje chaos szybciej niż człowiek bez kawy.
+- Wyraźny MVP pomaga zamieniać pomysły w małe, widoczne slice’y.
+
 ### Co mówię
-- Dobre wymagania skracają czas i redukują chaos.
-- AGENTS.md jako “kontrakt pracy” z agentem.
+- „Budujemy jeden spójny case, żeby nie tracić energii na przełączanie kontekstu.”
+- „MVP ma być małe, sensowne i przewidywalne. Nice to have zostają na smyczy.”
+- „Naszym celem nie jest wszystko naraz. Naszym celem jest kontrolowany postęp.”
 
 ### Co pokazuję
-- PRD draft,
-- AGENTS.md draft.
+- Zakres aplikacji NBP DevCopilot.
+- Przykładowe funkcje must-have vs later.
+- Ryzyka dla środowiska regulowanego i gdzie potrzebujemy guardrails.
 
 ### Co wklejam na chat
-"Prompt startowy: Stwórz zwięzły PRD + AGENTS.md dla aplikacji NBP DevCopilot z naciskiem na bezpieczeństwo i testowalność." 
+- `MVP = ma działać bezpiecznie i przewidywalnie. Funkcje ekstra dokładamy dopiero po stabilnej bazie.`
 
 ### Ćwiczenie
-- pary dopracowują PRD/AGENTS.
+- Core: każdy wybiera 1 funkcję must-have i 1 funkcję later.
+- Stretch: formułuje 1 ograniczenie bezpieczeństwa lub jakości dla wybranej funkcji.
 
-### Feedback
-- review 2 przykładów.
+### Feedback loop (Kolb)
+- Doświadczenie: uczestnicy sami odróżniają zakres podstawowy od dodatków.
+- Refleksja: co naprawdę daje wartość już teraz?
+- Konceptualizacja: dobre scope’owanie jest paliwem dla sensownej automatyzacji.
+- Testowanie: ten zakres posłuży za bazę do PRD i kolejnych artefaktów.
 
----
+### Szacowany czas
+- 30 min
+
+## 12:05–13:00 — PRD + AGENTS mini-workshop
+### Why this matters in daily work
+- Dobra specyfikacja i zasady pracy z agentem skracają iteracje, poprawiają jakość i zmniejszają ilość losowych odpowiedzi.
+- To jest moment, w którym „promptowanie” zamienia się w inżynierię pracy.
+
+### Co mówię
+- „Dobry PRD to nie korpo-esej. To narzędzie redukcji chaosu.”
+- „AGENTS.md traktujemy jak kontrakt pracy z agentem: co wolno, czego nie, jak sprawdzamy wynik.”
+- „Im lepsze reguły i acceptance criteria, tym mniej trzeba ratować później.”
+
+### Co pokazuję
+- Szkic PRD dla NBP DevCopilot.
+- Szkic AGENTS.md: styl pracy, granice, testy, review, bezpieczeństwo.
+- Jak z krótkiego briefu zrobić lepszy, bardziej operacyjny prompt.
+
+### Co wklejam na chat
+- `Prompt startowy: Stwórz zwięzły PRD + AGENTS.md dla aplikacji NBP DevCopilot z naciskiem na bezpieczeństwo, mały scope MVP i testowalność.`
+
+### Ćwiczenie
+- Core: w parach dopracować PRD lub AGENTS dla jednego modułu.
+- Stretch: dopisać acceptance criteria oraz 2 „red flags”, które powinny zatrzymać zbyt śmiały output AI.
+
+### Feedback loop (Kolb)
+- Doświadczenie: uczestnicy zamieniają ogólny pomysł w operacyjny dokument.
+- Refleksja: gdzie agent najbardziej potrzebuje doprecyzowania?
+- Konceptualizacja: jakość wejścia silnie wpływa na jakość autonomii.
+- Testowanie: po lunchu użyjemy tych artefaktów do wygenerowania pierwszego wyniku repo.
+
+### Szacowany czas
+- 55 min
 
 ## 13:00–13:30 — PRZERWA
 
----
+## 13:30–14:15 — Pierwszy widoczny artefakt repo
+### Why this matters in daily work
+- Sam PRD nie daje jeszcze poczucia postępu. Widoczny artefakt tak.
+- Zespoły szybciej ufają workflow, gdy już pierwszego dnia widzą coś namacalnego.
 
-## 13:30–14:30 — Architektura + pierwszy artefakt kodu
 ### Co mówię
-- “Małe, widoczne efekty > wielkie plany bez kodu.”
+- „Po lunchu chcemy czegoś, co można pokazać, ocenić i poprawić.”
+- „Małe, testowalne efekty są lepsze niż wielkie deklaracje bez kodu.”
+- „Pierwszy artefakt ma być skromny, ale sensowny: README slice, szkic endpointu, walidator, kontrakt API, test placeholder.”
 
 ### Co pokazuję
-- pierwsze slice’y backlogu,
-- pierwszy artefakt kodu/testu.
+- Jak z PRD/AGENTS przejść do małego zadania dla agenta.
+- Przykładowy prompt na pierwszy wynik repo.
+- Gdzie ten wynik powinien wylądować i jak sprawdzić, czy jest „good enough for first pass”.
 
 ### Co wklejam na chat
-"Mini-zadanie: wygeneruj 1 mały, testowalny artefakt (np. szkic endpointu lub walidatora) i opisz kryterium 'done'." 
+- `Mini-zadanie: wygeneruj 1 mały, widoczny artefakt repo i dopisz kryterium done. Przykład: szkic endpointu, walidator, kontrakt API, README modułu albo test placeholder.`
 
 ### Ćwiczenie
-- każdy zespół tworzy 1 artefakt.
+- Core: każdy zespół tworzy 1 mały artefakt powiązany z uzgodnionym MVP.
+- Stretch: dopisuje prosty review checklist lub acceptance criteria do tego artefaktu.
 
----
+### Feedback loop (Kolb)
+- Doświadczenie: uczestnicy widzą realny output, nie tylko teorię.
+- Refleksja: co było dobre, a co zbyt ogólne albo zbyt ambitne?
+- Konceptualizacja: agent działa najlepiej na małych, jasno zamkniętych zadaniach.
+- Testowanie: kolejne dni będą rozwijać dokładnie ten rytm pracy.
 
-## 14:30–14:40 — opcjonalna przerwa
+### Szacowany czas
+- 45 min
 
----
+## 14:15–14:30 — Review loop: generated draft ≠ truth
+### Why this matters in daily work
+- Największa wartość seniora nie znika przy AI — przesuwa się mocniej w stronę oceny, kontroli i decyzji.
+- Bez review AI daje szybkość, ale nie daje gwarancji trafności.
 
-## 14:40–15:20 — WezTerm + ergonomia pracy
 ### Co mówię
-- krótko: dlaczego WezTerm bywa wygodniejszy niż Windows Terminal dla agentów (TUI, ergonomia, powiadomienia).
+- „Generated ≠ approved. Output AI to draft, nie prawo natury.”
+- „Sprawdzamy: zgodność z wymaganiem, bezpieczeństwo, minimalny scope, testowalność, czytelność.”
+- „W środowisku regulowanym review i ślad decyzji są równie ważne jak tempo.”
 
 ### Co pokazuję
-- praktyczny mini-demo.
+- Krótki checklist review.
+- 1 przykład czegoś, co wygląda dobrze, ale wymaga korekty.
+- Jak szybko poprawić prompt lub ręcznie dopisać brakujący warunek.
 
 ### Co wklejam na chat
-"Cel nie jest 'mieć 100 narzędzi', tylko mieć 1 workflow, który działa codziennie bez tarcia." 
+- `Review checklist: 1) czy to odpowiada na zadanie, 2) czy jest bezpieczne, 3) czy scope nie urósł za bardzo, 4) czy da się to przetestować, 5) co poprawiamy zanim uznamy wynik za użyteczny?`
 
----
+### Ćwiczenie
+- Core: zespoły robią szybki review własnego artefaktu.
+- Stretch: wymieniają się artefaktami i robią peer review w 3 punktach.
 
-## 15:20–15:45 — Optional: Handy.computer teaser
+### Feedback loop (Kolb)
+- Doświadczenie: uczestnicy przechodzą z trybu „wow, coś wygenerowało” do trybu „czy to jest dobre?”.
+- Refleksja: jakie błędy najłatwiej przeoczyć?
+- Konceptualizacja: kontrola jakości jest częścią workflow, nie dodatkiem.
+- Testowanie: stosujemy ten sam rytm review w następnych dniach.
+
+### Szacowany czas
+- 15 min
+
+## 14:30–14:40 — OPCJONALNA PRZERWA
+
+## 14:40–15:20 — Flow pracy bez tarcia: ergonomia terminala i rytm pracy
+### Why this matters in daily work
+- Nawet dobry agent workflow boli, jeśli obsługa środowiska jest męcząca i zbyt krucha.
+- Ergonomia wpływa na to, czy ludzie naprawdę wdrożą workflow po szkoleniu.
+
 ### Co mówię
-- opcjonalny bonus, nie wymagany.
-- kiedy ma sens, kiedy nie.
+- „Nie chodzi o mieć 100 narzędzi. Chodzi o mieć 1 workflow, który działa codziennie bez tarcia.”
+- „Krótko pokażę ergonomię terminala i dlaczego niektóre środowiska są wygodniejsze do pracy z agentami.”
+- „To nie jest konkurs na najbardziej cyberpunkowy terminal.”
 
 ### Co pokazuję
-- 2 prompty głosowe: transkrypcja + tłumaczenie PL→EN.
+- Krótkie demo ergonomii pracy terminal-first.
+- Gdzie WezTerm bywa wygodniejszy od Windows Terminal dla agentowych TUI i powiadomień.
+- Jak utrzymać prosty, przewidywalny setup zamiast tool sprawl.
 
 ### Co wklejam na chat
-"Handy to opcja bonusowa. Jeśli VM/laptop nie wyrabia, pomijamy bez bólu." 
+- `Cel: mniej tarcia, więcej powtarzalności. Wybieramy środowisko, które pomaga pracować z agentem spokojnie i przewidywalnie.`
 
----
+### Ćwiczenie
+- Core: uczestnicy identyfikują 1 element swojego setupu, który najbardziej ich spowalnia.
+- Stretch: dopisują, jaką małą zmianę mogą przetestować jeszcze w tym tygodniu.
 
-## 15:45–16:00 — Podsumowanie dnia i zadanie domowe
+### Feedback loop (Kolb)
+- Doświadczenie: grupa porównuje własne ograniczenia i potrzeby.
+- Refleksja: co realnie przeszkadza w codziennej pracy?
+- Konceptualizacja: ergonomia to część produktywności, nie kosmetyka.
+- Testowanie: wybieramy 1 małą poprawkę środowiska do sprawdzenia w kolejnych dniach.
+
+### Szacowany czas
+- 40 min
+
+## 15:20–15:45 — Bonus opcjonalny: Handy.computer teaser
+### Why this matters in daily work
+- Nie każdy workflow musi być obowiązkowy. Warto pokazać też lekkie opcje bonusowe, ale bez narzucania ich całej grupie.
+- To buduje ciekawość bez rozwalania głównego toru szkolenia.
+
 ### Co mówię
-- Podsumowanie “co już mamy” i plan na Day 2.
-- Motywacja: "to dopiero rozgrzewka, jutro robimy architekturę pod automatyzację".
+- „To bonus, nie wymaganie. Jeśli laptop/VM nie wyrabia, pomijamy bez bólu.”
+- „Pokazuję to bardziej jako inspirację: gdzie głos i szybkie interakcje mogą mieć sens.”
+- „Nie robimy z tego religii. To tylko dodatkowy gadżet z potencjałem.”
 
 ### Co pokazuję
-- checklistę artefaktów zrobionych na Day 1.
+- Krótkie wprowadzenie do Handy.computer.
+- 2 przykładowe prompty głosowe: transkrypcja oraz tłumaczenie PL → EN.
+- Kiedy taki tool ma sens, a kiedy lepiej zostać przy podstawowym flow.
 
 ### Co wklejam na chat
-"Homework: dopracuj 1 sekcję PRD lub AGENTS.md i przygotuj 2 pytania do architektury na jutro." 
+- `Handy.computer = opcjonalny bonus. Jeśli środowisko nie wyrabia albo nie pasuje do Waszego trybu pracy, pomijamy bez dramatu.`
+
+### Ćwiczenie
+- Core: uczestnicy oceniają, czy taki dodatek miałby sens w ich własnym workflow.
+- Stretch: wpisują 1 zadanie, do którego głos miałby sens, i 1 zadanie, gdzie absolutnie nie.
+
+### Feedback loop (Kolb)
+- Doświadczenie: grupa widzi alternatywny, lekki tryb interakcji.
+- Refleksja: czy to wspiera pracę, czy tylko dodaje gadżetowości?
+- Konceptualizacja: nie każde nowe narzędzie zwiększa wartość.
+- Testowanie: kto chce, może później sprawdzić to prywatnie jako eksperyment.
+
+### Szacowany czas
+- 25 min
+
+## 15:45–16:00 — Podsumowanie dnia + praca domowa
+### Why this matters in daily work
+- Ludzie zapamiętują lepiej to, co nazwą, podsumują i zamkną konkretnym następnym krokiem.
+- Dzień bez domknięcia łatwo zamienia się w „coś tam było o AI”.
+
+### Co mówię
+- „Dziś zrobiliśmy fundament: wspólny język, bezpieczny start, scope, pierwsze artefakty.”
+- „Jutro przechodzimy mocniej w architekturę, slice’y i delegowanie bardziej złożonych zadań.”
+- „Jeśli dziś było trochę chaosu — dobrze. Chaos został nazwany, a to już połowa porządku.”
+
+### Co pokazuję
+- Checklistę tego, co już powstało.
+- Co przenosimy na Day 2.
+- Gdzie w repo będą kolejne materiały dnia.
+
+### Co wklejam na chat
+- `Homework: dopracuj 1 sekcję PRD lub AGENTS.md i przygotuj 2 pytania do architektury / delegowania zadań na jutro.`
+
+### Ćwiczenie
+- Core: każdy zapisuje 1 rzecz, którą jutro chce robić lepiej z AI niż dziś.
+- Stretch: każdy dopisuje 1 ryzyko, które będzie chciał świadomie kontrolować.
+
+### Feedback loop (Kolb)
+- Doświadczenie: uczestnicy podsumowują własny postęp.
+- Refleksja: co już działa lepiej po pierwszym dniu?
+- Konceptualizacja: workflow AI to seria małych, świadomych decyzji.
+- Testowanie: praca domowa przygotowuje grunt pod Day 2.
+
+### Szacowany czas
+- 15 min
