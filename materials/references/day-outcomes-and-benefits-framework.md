@@ -1,4 +1,4 @@
-# Day-by-day framing: "Czego się nauczymy" + "Dlaczego to warto"
+# Day-by-day framing: "Czego się nauczymy" + "Dlaczego warto"
 
 Use this as a framing checklist when writing daily scripts.
 
