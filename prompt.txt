@@ -1,0 +1,65 @@
+Technical Context of the Application
+
+Stack: Java Spring Boot (backend), React (frontend), PostgreSQL (database), Windows Server environment
+User Interface: chat (conversational AI agent)
+The agent detects the intent to submit a loan application based on the user’s message
+After detecting the intent, the agent renders a dynamic loan application form
+The backend retrieves customer and financial data from PostgreSQL
+The system calculates a credit score and returns a recommendation with justification
+Every decision and every action taken by the agent must leave an audit trail
+Demo data: no existing data — create a complete schema and sample records from scratch tailored for MVP
+
+PRD Sections
+
+Write a PRD containing exactly the following sections in this order:
+
+1. Problem Statement
+
+Describe the specific business and operational problem that the application solves. Include the current state (pain points of loan advisors and analysts), the consequences of not having a solution, and the value delivered by the MVP.
+
+2. Users / Personas
+
+Create 2–3 personas. For each include: name and role, primary goal, frustrations with the current process, expectations toward the tool. Personas should be realistic for a banking environment.
+
+3. Main Flow
+
+Describe step by step the main user flow — from entering the chat, through intent detection, filling out the form, retrieving data from the database, calculating the score, up to displaying the recommendation and saving the audit trail.
+Use a numbered list or sequential pseudocode.
+
+4. User Stories
+
+Write 8–10 user stories in the format:
+As a [role], I want [action], so that [value].
+Cover different roles (advisor, analyst, compliance officer) and various system aspects (form, scoring, audit trail, error handling).
+
+5. Acceptance Criteria
+
+For each user story provide measurable acceptance criteria in the format Given/When/Then or as a list of testable conditions. Avoid non-verifiable criteria.
+
+6. Constraints and Risks
+
+Divide into:
+
+Non-functional constraints (performance, security, availability, regulatory compliance) — include specifics of Windows Server and JVM environments
+
+Project and technical risks with probability and impact assessment (table or list)
+
+7. MVP Scope / Out of Scope
+
+Two clearly separated lists:
+
+What is included in the MVP (must-have)
+
+What is explicitly out of scope for this version
+
+8. Assumptions for Demo Data
+
+Since demo data is created from scratch, design a complete test environment:
+
+PostgreSQL table schema (customers, financial_data, applications, audit_log) with column types compatible with Spring Boot / JPA
+
+At least 5 sample customer records with diverse risk profiles (good, medium, poor scoring)
+
+Simplifying assumptions (e.g. rule-based scoring model instead of ML)
+
+SQL INSERT script ready to run on a local PostgreSQL instance on Windows Server
