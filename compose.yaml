@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: stellirin/postgres-windows:latest
+    container_name: ai-course-postgres
+    isolation: hyperv
+    entrypoint:
+      - cmd
+    command:
+      - /S
+      - /C
+      - C:\startup\bootstrap.cmd
+    restart: unless-stopped
+    environment:
+      PGDATA: C:\pgsql\data
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: app_password_123
+      POSTGRES_DB: sample_app
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:C:\pgsql\data
+      - .\docker\postgres\init:C:\docker-entrypoint-initdb.d:ro
+      - .\docker\postgres\scripts:C:\startup:ro
+
+volumes:
+  postgres_data:
