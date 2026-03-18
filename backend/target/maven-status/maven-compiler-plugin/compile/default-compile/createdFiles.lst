@@ -8,4 +8,6 @@ com\silkycoders1\jsystemssilkycodders1\ChatMessage.class
 com\silkycoders1\jsystemssilkycodders1\BankCreditAgentService.class
 com\silkycoders1\jsystemssilkycodders1\ChatController.class
 com\silkycoders1\jsystemssilkycodders1\JSystemsSilkyCodders1Application.class
+com\silkycoders1\jsystemssilkycodders1\CreditAssessmentService.class
 com\silkycoders1\jsystemssilkycodders1\CustomerProfile.class
+com\silkycoders1\jsystemssilkycodders1\CreditAssessment.class

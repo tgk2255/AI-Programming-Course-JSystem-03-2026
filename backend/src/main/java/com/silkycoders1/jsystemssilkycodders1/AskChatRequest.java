@@ -6,6 +6,9 @@ import jakarta.validation.constraints.Size;
 
 public record AskChatRequest(
 	@NotBlank
+	@Size(max = 64)
+	String sessionId,
+	@NotBlank
 	@Size(max = 2000)
 	String message,
 	@Valid

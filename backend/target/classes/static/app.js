@@ -1,6 +1,18 @@
 const { useEffect, useState } = React;
 
+function getOrCreateSessionId() {
+  const existing = window.localStorage.getItem("bank_chat_session_id");
+  if (existing) {
+    return existing;
+  }
+
+  const created = window.crypto.randomUUID();
+  window.localStorage.setItem("bank_chat_session_id", created);
+  return created;
+}
+
 function App() {
+  const [sessionId, setSessionId] = useState(getOrCreateSessionId);
   const [dbStatus, setDbStatus] = useState("idle");
   const [dbMessage, setDbMessage] = useState("Backend i baza czekaja na sprawdzenie.");
   const [dbPayload, setDbPayload] = useState(null);
@@ -15,14 +27,15 @@ function App() {
     pesel: ""
   });
   const [customerInfo, setCustomerInfo] = useState(null);
+  const [creditAssessment, setCreditAssessment] = useState(null);
 
   useEffect(() => {
-    loadMessages();
-  }, []);
+    loadMessages(sessionId);
+  }, [sessionId]);
 
-  async function loadMessages() {
+  async function loadMessages(activeSessionId) {
     try {
-      const response = await fetch("/api/chat/messages");
+      const response = await fetch(`/api/chat/messages?sessionId=${encodeURIComponent(activeSessionId)}`);
       const data = await response.json();
 
       if (!response.ok) {
@@ -34,6 +47,19 @@ function App() {
     } catch (error) {
       setChatStatus(error.message || "Nie udalo sie zaladowac rozmowy.");
     }
+  }
+
+  function startNewConversation() {
+    const nextSessionId = window.crypto.randomUUID();
+    window.localStorage.setItem("bank_chat_session_id", nextSessionId);
+    setSessionId(nextSessionId);
+    setMessages([]);
+    setMessageInput("");
+    setShowCustomerForm(false);
+    setCustomer({ firstName: "", lastName: "", pesel: "" });
+    setCustomerInfo(null);
+    setCreditAssessment(null);
+    setChatStatus("Nowa rozmowa gotowa.");
   }
 
   async function handleCheck() {
@@ -71,6 +97,7 @@ function App() {
 
     try {
       const payload = {
+        sessionId,
         message: messageInput.trim(),
         customer: showCustomerForm && hasCustomerData()
           ? {
@@ -99,9 +126,12 @@ function App() {
       setMessageInput("");
       setShowCustomerForm(data.requiresCustomerData);
       setCustomerInfo(data.customerProfile);
+      setCreditAssessment(data.creditAssessment);
 
       if (data.requiresCustomerData) {
         setChatStatus("Agent potrzebuje danych klienta do rozmowy kredytowej.");
+      } else if (data.creditAssessment && data.creditAssessment.complete) {
+        setChatStatus("Wyliczono wstepna zdolnosc kredytowa.");
       } else if (data.customerFound && data.customerProfile) {
         setChatStatus(`Znaleziono klienta ${data.customerProfile.firstName} ${data.customerProfile.lastName} z dochodem ${data.customerProfile.monthlyIncome} ${data.customerProfile.currency}.`);
       } else {
@@ -141,7 +171,7 @@ function App() {
     React.createElement(
       "p",
       { className: "lead" },
-      "Rozmawiasz z agentem bankowym o kredytach. Gdy rozmowa wejdzie na temat kredytu, aplikacja poprosi o dane klienta i sprawdzi je w PostgreSQL."
+      "Rozmawiasz z agentem bankowym o kredytach. Aplikacja prowadzi osobne sesje rozmow, zapisuje dialog do PostgreSQL i potrafi policzyc wstepna zdolnosc kredytowa."
     ),
     React.createElement(
       "div",
@@ -152,11 +182,17 @@ function App() {
         dbStatus === "pending" ? "Sprawdzanie..." : "Sprawdz polaczenie z baza"
       ),
       React.createElement(
+        "button",
+        { className: "secondary", onClick: startNewConversation, disabled: sending },
+        "Nowa rozmowa"
+      ),
+      React.createElement(
         "div",
         { className: `status ${dbStatus === "idle" ? "pending" : dbStatus}` },
         dbMessage
       )
     ),
+    React.createElement("p", { className: "session-label" }, `Sesja: ${sessionId}`),
     dbPayload &&
       React.createElement(
         "section",
@@ -179,6 +215,24 @@ function App() {
           { className: "customer-summary" },
           React.createElement("strong", null, "Klient w bazie: "),
           `${customerInfo.firstName} ${customerInfo.lastName}, PESEL ${customerInfo.pesel}, dochod ${customerInfo.monthlyIncome} ${customerInfo.currency}`
+        ),
+      creditAssessment &&
+        React.createElement(
+          "div",
+          { className: "assessment-panel" },
+          React.createElement("h3", null, "Wstepna ocena zdolnosci"),
+          React.createElement("p", null, creditAssessment.summary),
+          creditAssessment.complete &&
+            React.createElement(
+              "div",
+              { className: "assessment-grid" },
+              React.createElement("span", null, `Kwota: ${creditAssessment.requestedAmount} PLN`),
+              React.createElement("span", null, `Okres: ${creditAssessment.repaymentMonths} mies.`),
+              React.createElement("span", null, `Rata: ${creditAssessment.estimatedInstallment} PLN`),
+              React.createElement("span", null, `Limit: ${creditAssessment.affordabilityLimit} PLN`),
+              React.createElement("span", null, `Zobowiazania: ${creditAssessment.monthlyObligations} PLN`),
+              React.createElement("span", null, `Decyzja: ${creditAssessment.decision}`)
+            )
         ),
       showCustomerForm &&
         React.createElement(
@@ -214,7 +268,7 @@ function App() {
         "div",
         { className: "message-list" },
         messages.length === 0
-          ? React.createElement("p", { className: "empty-state" }, "Brak zapisanych wiadomosci.")
+          ? React.createElement("p", { className: "empty-state" }, "Brak zapisanych wiadomosci w tej sesji.")
           : messages.map(renderMessage)
       ),
       React.createElement(
@@ -225,7 +279,7 @@ function App() {
           onChange: (event) => setMessageInput(event.target.value),
           rows: 4,
           maxLength: 2000,
-          placeholder: "Napisz do agenta kredytowego, np. Chce wziac kredyt gotowkowy"
+          placeholder: "Np. Chce kredyt 50000 na 48 miesiecy, bez zobowiazan"
         }),
         React.createElement(
           "button",

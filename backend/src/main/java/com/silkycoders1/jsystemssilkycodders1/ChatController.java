@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,12 +27,12 @@ public class ChatController {
 	}
 
 	@GetMapping("/messages")
-	public List<ChatMessage> listMessages() {
-		return chatMessageRepository.findAll();
+	public List<ChatMessage> listMessages(@RequestParam String sessionId) {
+		return chatMessageRepository.findAll(sessionId);
 	}
 
 	@PostMapping("/ask")
 	public ChatAskResponse ask(@Valid @RequestBody AskChatRequest request) {
-		return bankCreditAgentService.ask(request.message(), request.customer());
+		return bankCreditAgentService.ask(request.sessionId(), request.message(), request.customer());
 	}
 }

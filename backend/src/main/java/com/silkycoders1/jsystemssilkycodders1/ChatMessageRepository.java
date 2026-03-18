@@ -20,20 +20,31 @@ public class ChatMessageRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	public List<ChatMessage> findAll() {
+	public List<ChatMessage> findAll(String sessionId) {
 		return jdbcTemplate.query("""
 			SELECT id, role, author, content, created_at
 			FROM public.chat_message
+			WHERE session_id = ?
 			ORDER BY created_at ASC, id ASC
-			""", CHAT_MESSAGE_ROW_MAPPER);
+			""", CHAT_MESSAGE_ROW_MAPPER, sessionId);
 	}
 
-	public ChatMessage save(String role, String author, String content) {
+	public void ensureSessionExists(String sessionId) {
+		jdbcTemplate.update("""
+			INSERT INTO public.chat_session (session_id, title)
+			VALUES (?, 'Rozmowa kredytowa')
+			ON CONFLICT (session_id) DO NOTHING
+			""", sessionId);
+	}
+
+	public ChatMessage save(String sessionId, String role, String author, String content) {
+		ensureSessionExists(sessionId);
+
 		ChatMessage savedMessage = jdbcTemplate.queryForObject("""
-			INSERT INTO public.chat_message (role, author, content)
-			VALUES (?, ?, ?)
+			INSERT INTO public.chat_message (session_id, role, author, content)
+			VALUES (?, ?, ?, ?)
 			RETURNING id, role, author, content, created_at
-			""", CHAT_MESSAGE_ROW_MAPPER, role, author, content);
+			""", CHAT_MESSAGE_ROW_MAPPER, sessionId, role, author, content);
 
 		if (savedMessage == null) {
 			throw new IllegalStateException("Insert into chat_message returned no row.");

@@ -3,3 +3,9 @@ databaseChangeLog:
       file: db/changelog/changes/001-create-chat-message.sql
   - include:
       file: db/changelog/changes/002-chat-role-and-customer-profile.sql
+  - include:
+      file: db/changelog/changes/003-chat-session-and-cleanup.sql
+  - include:
+      file: db/changelog/changes/004-clean-legacy-test-messages.sql
+  - include:
+      file: db/changelog/changes/005-drop-legacy-session.sql

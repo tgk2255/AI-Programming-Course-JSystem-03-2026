@@ -26,6 +26,7 @@ public class BankCreditAgentService {
 
 	private final ChatMessageRepository chatMessageRepository;
 	private final CustomerProfileRepository customerProfileRepository;
+	private final CreditAssessmentService creditAssessmentService;
 	private final Environment environment;
 	private final ObjectMapper objectMapper;
 	private final HttpClient httpClient;
@@ -35,6 +36,7 @@ public class BankCreditAgentService {
 	public BankCreditAgentService(
 		ChatMessageRepository chatMessageRepository,
 		CustomerProfileRepository customerProfileRepository,
+		CreditAssessmentService creditAssessmentService,
 		Environment environment,
 		ObjectMapper objectMapper,
 		@Value("${app.ai.openrouter.url}") String openRouterUrl,
@@ -42,6 +44,7 @@ public class BankCreditAgentService {
 	) {
 		this.chatMessageRepository = chatMessageRepository;
 		this.customerProfileRepository = customerProfileRepository;
+		this.creditAssessmentService = creditAssessmentService;
 		this.environment = environment;
 		this.objectMapper = objectMapper;
 		this.openRouterUrl = openRouterUrl;
@@ -51,23 +54,28 @@ public class BankCreditAgentService {
 			.build();
 	}
 
-	public ChatAskResponse ask(String rawMessage, CustomerLookupRequest customerLookupRequest) {
+	public ChatAskResponse ask(String sessionId, String rawMessage, CustomerLookupRequest customerLookupRequest) {
 		String message = rawMessage.trim();
 		boolean creditIntent = isCreditIntent(message);
 		Optional<CustomerProfile> customerProfile = findCustomer(customerLookupRequest);
+		CreditAssessment creditAssessment = customerProfile.isPresent() && creditIntent
+			? creditAssessmentService.assess(customerProfile.get(), message)
+			: null;
 
-		ChatMessage userMessage = chatMessageRepository.save("user", resolveUserAuthor(customerLookupRequest), message);
+		ChatMessage userMessage = chatMessageRepository.save(sessionId, "user", resolveUserAuthor(customerLookupRequest), message);
 
 		boolean requiresCustomerData = creditIntent && customerProfile.isEmpty();
-		String assistantText = buildAssistantMessage(message, creditIntent, customerLookupRequest, customerProfile);
-		ChatMessage assistantMessage = chatMessageRepository.save("assistant", ASSISTANT_NAME, assistantText);
+		String assistantText = buildAssistantMessage(message, creditIntent, customerLookupRequest, customerProfile, creditAssessment);
+		ChatMessage assistantMessage = chatMessageRepository.save(sessionId, "assistant", ASSISTANT_NAME, assistantText);
 
 		return new ChatAskResponse(
+			sessionId,
 			userMessage,
 			assistantMessage,
 			requiresCustomerData,
 			customerProfile.isPresent(),
-			customerProfile.orElse(null)
+			customerProfile.orElse(null),
+			creditAssessment
 		);
 	}
 
@@ -105,7 +113,8 @@ public class BankCreditAgentService {
 		String message,
 		boolean creditIntent,
 		CustomerLookupRequest customerLookupRequest,
-		Optional<CustomerProfile> customerProfile
+		Optional<CustomerProfile> customerProfile,
+		CreditAssessment creditAssessment
 	) {
 		if (creditIntent && customerLookupRequest == null) {
 			return """
@@ -121,14 +130,65 @@ public class BankCreditAgentService {
 				""".strip();
 		}
 
-		String fallback = localFallback(creditIntent, customerProfile);
+		String fallback = localFallback(creditIntent, customerProfile, creditAssessment);
 		String apiResponse = fetchAiResponse(message, creditIntent, customerProfile).orElse(null);
 		return apiResponse == null || apiResponse.isBlank() ? fallback : apiResponse;
 	}
 
-	private String localFallback(boolean creditIntent, Optional<CustomerProfile> customerProfile) {
+	private String localFallback(boolean creditIntent, Optional<CustomerProfile> customerProfile, CreditAssessment creditAssessment) {
 		if (creditIntent && customerProfile.isPresent()) {
 			CustomerProfile profile = customerProfile.get();
+
+			if (creditAssessment != null && creditAssessment.complete()) {
+				return """
+					Dziekuje. Znalazlem klienta w bazie.
+					Klient: %s %s
+					PESEL: %s
+					Dochod miesieczny: %s %s
+
+					Wstepna ocena zdolnosci:
+					- kwota kredytu: %s PLN
+					- okres splaty: %s miesiecy
+					- szacowana rata: %s PLN
+					- limit bezpiecznej raty: %s PLN
+					- obecne zobowiazania: %s PLN
+					- decyzja wstepna: %s
+
+					%s
+					""".formatted(
+					profile.firstName(),
+					profile.lastName(),
+					profile.pesel(),
+					profile.monthlyIncome().toPlainString(),
+					profile.currency(),
+					creditAssessment.requestedAmount().toPlainString(),
+					creditAssessment.repaymentMonths(),
+					creditAssessment.estimatedInstallment().toPlainString(),
+					creditAssessment.affordabilityLimit().toPlainString(),
+					creditAssessment.monthlyObligations().toPlainString(),
+					creditAssessment.decision(),
+					creditAssessment.summary()
+				).strip();
+			}
+
+			if (creditAssessment != null && !creditAssessment.complete()) {
+				return """
+					Dziekuje. Znalazlem klienta w bazie.
+					Klient: %s %s
+					PESEL: %s
+					Dochod miesieczny: %s %s
+
+					%s
+					""".formatted(
+					profile.firstName(),
+					profile.lastName(),
+					profile.pesel(),
+					profile.monthlyIncome().toPlainString(),
+					profile.currency(),
+					creditAssessment.summary()
+				).strip();
+			}
+
 			return """
 				Dziekuje. Znalazlem klienta w bazie.
 				Klient: %s %s
