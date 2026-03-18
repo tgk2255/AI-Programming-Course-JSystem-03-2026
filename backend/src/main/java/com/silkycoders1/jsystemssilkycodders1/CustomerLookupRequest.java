@@ -3,12 +3,15 @@ package com.silkycoders1.jsystemssilkycodders1;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public record CreateChatMessageRequest(
+public record CustomerLookupRequest(
 	@NotBlank
 	@Size(max = 80)
-	String author,
+	String firstName,
 	@NotBlank
-	@Size(max = 2000)
-	String content
+	@Size(max = 80)
+	String lastName,
+	@NotBlank
+	@Size(max = 40)
+	String pesel
 ) {
 }
