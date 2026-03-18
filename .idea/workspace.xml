@@ -7,25 +7,6 @@
     <list default="true" id="f9efb2d9-8752-42cc-831e-57971d8496d9" name="Changes" comment="aplikacja chat z agentem">
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/AI-Programming-Course-JSystem-03-2026.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/silkycoders1/jsystemssilkycodders1/AskChatRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/silkycoders1/jsystemssilkycodders1/AskChatRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/silkycoders1/jsystemssilkycodders1/BankCreditAgentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/silkycoders1/jsystemssilkycodders1/BankCreditAgentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/silkycoders1/jsystemssilkycodders1/ChatAskResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/silkycoders1/jsystemssilkycodders1/ChatAskResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/silkycoders1/jsystemssilkycodders1/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/silkycoders1/jsystemssilkycodders1/ChatController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/silkycoders1/jsystemssilkycodders1/ChatMessageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/silkycoders1/jsystemssilkycodders1/ChatMessageRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/db/changelog/db.changelog-master.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/db/changelog/db.changelog-master.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/static/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/static/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/AskChatRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/AskChatRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/BankCreditAgentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/BankCreditAgentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/ChatAskResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/ChatAskResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/ChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/ChatController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/ChatMessageRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/ChatMessageRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/db/changelog/db.changelog-master.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/db/changelog/db.changelog-master.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/static/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/static/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +80,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773821231375</updated>
-      <workItem from="1773821232522" duration="5930000" />
+      <workItem from="1773821232522" duration="6429000" />
     </task>
     <task id="LOCAL-00001" summary="aplikacja react działający chat">
       <option name="closed" value="true" />
@@ -133,7 +114,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773828292046</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="aplikacja chat z agentem">
+      <option name="closed" value="true" />
+      <created>1773830262553</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1773830262553</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
