@@ -9,3 +9,10 @@ Course workspace for 5-day training.
 - prompts/ - copy/paste prompts used during sessions
 - materials/ - scripts, handouts, references
 - materials/scripts/ - helper scripts for setup/demo
+
+## Run local package
+- Requirements: Docker Desktop running and Java 21 available in `PATH`
+- Build backend jar: `build-ai-course.cmd`
+- Start app + PostgreSQL: `run-ai-course.cmd`
+- Stop app + PostgreSQL: `stop-ai-course.cmd`
+- App URL: `http://localhost:8080`
