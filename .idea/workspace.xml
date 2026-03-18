@@ -7,6 +7,9 @@
     <list default="true" id="f9efb2d9-8752-42cc-831e-57971d8496d9" name="Changes" comment="aplikacja chat z agentem">
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/AI-Programming-Course-JSystem-03-2026.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/static/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/static/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/static/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/static/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +83,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773821231375</updated>
-      <workItem from="1773821232522" duration="6429000" />
+      <workItem from="1773821232522" duration="7585000" />
     </task>
     <task id="LOCAL-00001" summary="aplikacja react działający chat">
       <option name="closed" value="true" />
@@ -122,7 +125,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773830262553</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="aplikacja chat z agentem">
+      <option name="closed" value="true" />
+      <created>1773830786845</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1773830786845</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

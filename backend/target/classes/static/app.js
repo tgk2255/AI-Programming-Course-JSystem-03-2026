@@ -28,6 +28,7 @@ function App() {
   });
   const [customerInfo, setCustomerInfo] = useState(null);
   const [creditAssessment, setCreditAssessment] = useState(null);
+  const [pendingCreditMessage, setPendingCreditMessage] = useState("");
 
   useEffect(() => {
     loadMessages(sessionId);
@@ -59,6 +60,7 @@ function App() {
     setCustomer({ firstName: "", lastName: "", pesel: "" });
     setCustomerInfo(null);
     setCreditAssessment(null);
+    setPendingCreditMessage("");
     setChatStatus("Nowa rozmowa gotowa.");
   }
 
@@ -123,10 +125,12 @@ function App() {
       }
 
       setMessages((current) => [...current, data.userMessage, data.assistantMessage]);
+      const submittedMessage = messageInput.trim();
       setMessageInput("");
       setShowCustomerForm(data.requiresCustomerData);
       setCustomerInfo(data.customerProfile);
       setCreditAssessment(data.creditAssessment);
+      setPendingCreditMessage(data.requiresCustomerData ? submittedMessage : "");
 
       if (data.requiresCustomerData) {
         setChatStatus("Agent potrzebuje danych klienta do rozmowy kredytowej.");
@@ -144,8 +148,79 @@ function App() {
     }
   }
 
+  async function handleCustomerLookup(event) {
+    if (event) {
+      event.preventDefault();
+    }
+
+    if (!hasCustomerData()) {
+      setChatStatus("Uzupelnij imie, nazwisko i PESEL.");
+      return;
+    }
+
+    const baseMessage = messageInput.trim() || pendingCreditMessage;
+    if (!baseMessage) {
+      setChatStatus("Najpierw wpisz wiadomosc o kredycie.");
+      return;
+    }
+
+    setSending(true);
+    setChatStatus("Sprawdzam klienta w bazie...");
+
+    try {
+      const payload = {
+        sessionId,
+        message: baseMessage,
+        customer: {
+          firstName: customer.firstName.trim(),
+          lastName: customer.lastName.trim(),
+          pesel: customer.pesel.trim()
+        }
+      };
+
+      const response = await fetch("/api/chat/ask", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error("Nie udalo sie sprawdzic klienta.");
+      }
+
+      setMessages((current) => [...current, data.userMessage, data.assistantMessage]);
+      setMessageInput("");
+      setShowCustomerForm(data.requiresCustomerData);
+      setCustomerInfo(data.customerProfile);
+      setCreditAssessment(data.creditAssessment);
+      setPendingCreditMessage(data.requiresCustomerData ? baseMessage : "");
+
+      if (data.creditAssessment && data.creditAssessment.complete) {
+        setChatStatus("Klient sprawdzony. Wyliczono wstepna zdolnosc kredytowa.");
+      } else if (data.customerFound && data.customerProfile) {
+        setChatStatus(`Znaleziono klienta ${data.customerProfile.firstName} ${data.customerProfile.lastName}.`);
+      } else if (data.requiresCustomerData) {
+        setChatStatus("Nie znaleziono klienta. Sprawdz dane i sprobuj ponownie.");
+      } else {
+        setChatStatus("Dane klienta zostaly wyslane.");
+      }
+    } catch (error) {
+      setChatStatus(error.message || "Wystapil blad podczas sprawdzania klienta.");
+    } finally {
+      setSending(false);
+    }
+  }
+
   function hasCustomerData() {
     return customer.firstName.trim() && customer.lastName.trim() && customer.pesel.trim();
+  }
+
+  function hasAnyCustomerData() {
+    return customer.firstName.trim() || customer.lastName.trim() || customer.pesel.trim();
   }
 
   function renderMessage(message) {
@@ -236,8 +311,8 @@ function App() {
         ),
       showCustomerForm &&
         React.createElement(
-          "div",
-          { className: "customer-panel" },
+          "form",
+          { className: "customer-panel customer-form", onSubmit: handleCustomerLookup },
           React.createElement("h3", null, "Dane klienta do sprawdzenia"),
           React.createElement(
             "div",
@@ -262,6 +337,15 @@ function App() {
             "p",
             { className: "hint" },
             "Dane testowe w bazie: Janek Tester, PESEL 1234567"
+          ),
+          React.createElement(
+            "button",
+            {
+              type: "button",
+              onClick: handleCustomerLookup,
+              disabled: sending || !hasAnyCustomerData()
+            },
+            sending ? "Sprawdzanie..." : "Sprawdz klienta"
           )
         ),
       React.createElement(
@@ -283,7 +367,7 @@ function App() {
         }),
         React.createElement(
           "button",
-          { type: "submit", disabled: sending || !messageInput.trim() || (showCustomerForm && !hasCustomerData()) },
+          { type: "submit", disabled: sending || !messageInput.trim() },
           sending ? "Wysylanie..." : "Wyslij"
         )
       )
