@@ -1,6 +1,11 @@
+com\silkycoders1\jsystemssilkycodders1\CustomerLookupRequest.class
 com\silkycoders1\jsystemssilkycodders1\DbHealthController.class
-com\silkycoders1\jsystemssilkycodders1\JSystemsSilkyCodders1Application.class
+com\silkycoders1\jsystemssilkycodders1\CustomerProfileRepository.class
+com\silkycoders1\jsystemssilkycodders1\ChatAskResponse.class
+com\silkycoders1\jsystemssilkycodders1\AskChatRequest.class
 com\silkycoders1\jsystemssilkycodders1\ChatMessageRepository.class
 com\silkycoders1\jsystemssilkycodders1\ChatMessage.class
-com\silkycoders1\jsystemssilkycodders1\CreateChatMessageRequest.class
+com\silkycoders1\jsystemssilkycodders1\BankCreditAgentService.class
 com\silkycoders1\jsystemssilkycodders1\ChatController.class
+com\silkycoders1\jsystemssilkycodders1\JSystemsSilkyCodders1Application.class
+com\silkycoders1\jsystemssilkycodders1\CustomerProfile.class

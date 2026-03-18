@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
       file: db/changelog/changes/001-create-chat-message.sql
+  - include:
+      file: db/changelog/changes/002-chat-role-and-customer-profile.sql

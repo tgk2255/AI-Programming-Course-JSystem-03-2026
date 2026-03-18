@@ -4,19 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9efb2d9-8752-42cc-831e-57971d8496d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/AI-Programming-Course.iml" afterDir="false" />
+    <list default="true" id="f9efb2d9-8752-42cc-831e-57971d8496d9" name="Changes" comment="aplikacja react działający chat">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/AI-Programming-Course-JSystem-03-2026.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/silkycoders1/jsystemssilkycodders1/JSystemsSilkyCodders1Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/silkycoders1/jsystemssilkycodders1/JSystemsSilkyCodders1Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/ChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/ChatController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/ChatMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/ChatMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/ChatMessageRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/ChatMessageRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/silkycoders1/jsystemssilkycodders1/CreateChatMessageRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/db/changelog/db.changelog-master.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/db/changelog/db.changelog-master.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/static/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/static/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +31,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "tgk2255"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/tgk2255/AI-Programming-Course-JSystem-03-2026.git",
+    "accountId": "2c4e6ef3-8302-4eeb-9205-901373ebff85"
+  }
+}]]></component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -78,8 +92,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1773821231375</updated>
-      <workItem from="1773821232522" duration="3425000" />
+      <workItem from="1773821232522" duration="4347000" />
     </task>
+    <task id="LOCAL-00001" summary="aplikacja react działający chat">
+      <option name="closed" value="true" />
+      <created>1773827320497</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1773827320497</updated>
+    </task>
+    <task id="LOCAL-00002" summary="aplikacja react działający chat">
+      <option name="closed" value="true" />
+      <created>1773827659362</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1773827659362</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -95,5 +126,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="aplikacja react działający chat" />
+    <option name="LAST_COMMIT_MESSAGE" value="aplikacja react działający chat" />
   </component>
 </project>
