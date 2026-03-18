@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/AI-Programming-Course-JSystem-03-2026.iml" filepath="$PROJECT_DIR$/.idea/AI-Programming-Course-JSystem-03-2026.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AI-Programming-Course.iml" filepath="$PROJECT_DIR$/AI-Programming-Course.iml" />
     </modules>
   </component>
 </project>

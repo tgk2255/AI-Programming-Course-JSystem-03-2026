@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Course Chat</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <style>
+    :root {
+      --bg: #f3efe6;
+      --card: rgba(255, 252, 246, 0.9);
+      --ink: #1f2a1f;
+      --muted: #5f6c5f;
+      --accent: #1f7a5a;
+      --accent-dark: #14533d;
+      --line: rgba(31, 42, 31, 0.12);
+      --ok: #177245;
+      --err: #b42318;
+      --shadow: 0 24px 60px rgba(31, 42, 31, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Aptos", "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(31, 122, 90, 0.16), transparent 32%),
+        radial-gradient(circle at right, rgba(176, 134, 53, 0.15), transparent 28%),
+        linear-gradient(145deg, #f7f3eb 0%, #efe7da 48%, #e8efe8 100%);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .shell {
+      width: min(720px, 100%);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Georgia", serif;
+      font-size: clamp(36px, 6vw, 56px);
+      line-height: 0.98;
+    }
+
+    .lead {
+      margin: 16px 0 0;
+      max-width: 42ch;
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 15px 24px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+      box-shadow: 0 18px 36px rgba(20, 83, 61, 0.28);
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.72;
+      cursor: wait;
+    }
+
+    .status {
+      min-height: 24px;
+      font-weight: 700;
+    }
+
+    .status.pending {
+      color: var(--muted);
+    }
+
+    .status.ok {
+      color: var(--ok);
+    }
+
+    .status.err {
+      color: var(--err);
+    }
+
+    .result {
+      margin-top: 28px;
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .result h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font: 14px/1.5 "Consolas", "Courier New", monospace;
+      color: #223022;
+    }
+
+    .chat {
+      margin-top: 28px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+    }
+
+    .chat-header h2,
+    .chat-header p {
+      margin: 0;
+    }
+
+    .chat-header p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .message-list {
+      display: grid;
+      gap: 12px;
+      max-height: 340px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .message-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .message-card p {
+      margin: 10px 0 0;
+      line-height: 1.5;
+    }
+
+    .message-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .chat-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    .chat-form input,
+    .chat-form textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 16px;
+      font: inherit;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .chat-form textarea {
+      resize: vertical;
+      min-height: 112px;
+    }
+
+    .empty-state {
+      margin: 0;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px dashed var(--line);
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
